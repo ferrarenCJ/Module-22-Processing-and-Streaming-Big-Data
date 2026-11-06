@@ -51,3 +51,14 @@ htmlcov/
 
 # MyPy
 .mypy_cache/
+
+
+# Big Data Activity Outputs
+*.parquet
+*.ftr
+
+# Activity output files
+Coding_Activities/*/output/
+
+# DASK temp files
+dask-worker-space/
