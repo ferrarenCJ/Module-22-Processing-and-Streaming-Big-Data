@@ -62,3 +62,24 @@ Coding_Activities/*/output/
 
 # DASK temp files
 dask-worker-space/
+
+
+# Virtual Environment
+venv/
+
+# Local Tools
+Tools/
+
+# Batch Files
+*.bat
+
+# Big Data Files
+*.parquet
+*.ftr
+
+# DASK
+dask-worker-space/
+
+# Graphviz Visualizations
+*.svg
+*.png
