@@ -2,207 +2,122 @@
 
 ## Overview
 
-This coding activity focused on using DASK to read and analyze multiple CSV files in parallel. Rather than loading individual files sequentially, DASK combines multiple files into a single logical DataFrame and processes them using parallel computing techniques.
-
-The activity simulated a common data engineering scenario in which data is distributed across many files and must be analyzed efficiently. Using DASK, I generated a collection of CSV files, loaded them using a wildcard pattern, and performed basic analytical operations on the resulting dataset.
+This coding activity focused on using DASK to read and analyze multiple CSV files in parallel. The activity simulated a real-world data engineering scenario where data is distributed across many files and must be processed efficiently. Using DASK, multiple CSV files were loaded into a single logical DataFrame and analyzed using parallel processing techniques.
 
 ---
 
 # Learning Outcome
 
-**Run parallel operations in DASK.**
-
----
-
-# Objectives
-
-- Generate multiple CSV files using DASK.
-- Read multiple files using a wildcard pattern.
-- Load all files into a single DASK DataFrame.
-- Analyze the dataset using DASK.
-- Compute summary statistics.
-- Determine dataset dimensions.
-- Gain practical experience with parallel file processing.
+Run parallel operations in DASK.
 
 ---
 
 # Activity Summary
 
-### Part 1: Generate Files
+The activity consisted of four major components:
 
-A DASK script was used to generate a collection of CSV files inside a data directory.
+### Generate Multiple Files
 
-### Part 2: Read Files
+A DASK script was used to generate a collection of CSV files representing a large time-series dataset.
 
-A wildcard pattern was used to read all CSV files beginning with:
+### Read Multiple Files
+
+DASK loaded all CSV files simultaneously using a wildcard pattern.
+
+### Perform Data Analysis
+
+Several analytical operations were executed including:
+
+- Displaying the first five rows
+- Computing the mean of column `x`
+- Counting the number of columns
+- Counting the number of rows
+
+### Validate Results
+
+The output was reviewed to verify the structure and size of the dataset.
+
+---
+
+# Technologies Used
+
+## Python
+
+Used for implementing the data processing workflow.
+
+## DASK
+
+Used for:
+
+- Reading multiple files
+- Parallel processing
+- Distributed-style DataFrame operations
+- Large dataset analytics
+
+## Visual Studio Code
+
+Used as the development environment.
+
+---
+
+# Files Used
+
+## Input Files
+
+Generated automatically using:
 
 ```text
-2000
+GenerateFilesWithDask.py
 ```
 
-using:
+Resulting data files:
+
+```text
+2000-01-01.csv
+2000-01-02.csv
+2000-01-03.csv
+...
+2000-01-30.csv
+```
+
+## Analysis Script
+
+```text
+Activity22-2.py
+```
+
+---
+
+# Key Code
+
+## Read All CSV Files
 
 ```python
 df = ddf.read_csv("data/2000*.csv")
 ```
 
-### Part 3: Analyze Da*a
-
-Basic analytics were performed:*
-- Display first five rows
-- Calcu*ate mean of column x
-- Determine n*mber of columns
-- Determine number*of rows
-
----
-
-# DASK Libraries Use*
+## Display First Five Rows
 
 ```python
-import dask.dataframe *s ddf
-from dask import delayed
-```*
-These libraries provide:
-
-- DASK *ataFrames
-- Parallel processing ca*abilities
-- Lazy evaluation
-- Dist*ibuted execution support
-
----
-
-# R*ading Multiple Files
-
-The dataset *as read using:
-
-```python
-df = ddf.read_csv("data/2000*.csv")
-```
-
-The wildcard:
-
-```text
-*
-```
-
-allowed DASK to automatically load every file matching:
-
-```text
-2000*.csv
-```
-
-This eliminated the need*to manually load each file one at * time.
-
----
-
-# Displaying the Data*
-The first few rows were displayed*using:
-
-```python
-print(df.head())*```
-
-Sample output:
-
-```text
-     *       timestamp      name    id  *      x         y
-0  2000-01-01 00*00:00   Sarah   1016  0.859279  0*786359
-1  2000-01-01 00*00:01  Hannah   1025  0.388*18 -0.443454
-2  2000-01-*1 00:00:02  George    926  0*375695 -0.282884
-3  2000-*1-01 00:00:03     Ray    947 -*.158507 -0.358797
-4  2000*01-01 00:00:04  Norbert 103*  0.283657 -0.310872
-```
-
-*--
-
-# Computing the Mean
-
-The*mean value of column x was compute* using:
-
-```python
-*ean = df['x'].mean().compute()
-
-pr*nt(f'm*an: {mean}')
-```
-
-Result:
-
-```text*mean* 0.000247275555067066
-```
-
-DASK pr*cessed the calculation across all *oaded files and combined the resul*s.
-
----
-
-# Computing the Number of*Columns
-
-The total number of colum*s was determined using:
-
-```python*cols = len(df.columns)
-
-print(f'co*umns: {cols}')
-```
-
-Result:
-
-```te*t
-columns: 5
-```
-
-Columns identifi*d:
-
-```text
-timestamp
-name
-id
-x
-y
-*``
-
----
-
-# Computing the Number of*Rows
-
-The total number of rows was*determined using:
-
-```python
-rows * len(df.index)
-
-print(f'rows: {row*}')
-```
-
-Result:
-
-```text
-rows: 25*2000
-```
-
-This demonstrates DASK's*ability to efficiently manage data*ets containing millions of records*spread across many files.
-
----
-
-# *inal Script
-
-```python
-import dask*dataframe as ddf
-from dask import delayed
-
-df = ddf.read_csv("data/2000*.csv")
-
-df.compute()
-
 print(df.head())
+```
 
+## Compute Mean
+
+```python
 mean = df['x'].mean().compute()
+```
 
-print(f'mean: {mean}')
+## Count Columns
 
+```python
 cols = len(df.columns)
+```
 
-print(f'columns: {cols}')
+## Count Rows
 
+```python
 rows = len(df.index)
-
-print(f'rows: {rows}')
 ```
 
 ---
@@ -212,78 +127,78 @@ print(f'rows: {rows}')
 | Metric | Result |
 |----------|----------|
 | Mean of x | 0.000247275555067066 |
-| Number of Columns | 5 |
-| Number of Rows | 2,592,000 |
+| Columns | 5 |
+| Rows | 2,592,000 |
 
 ---
 
 # Key Concepts Demonstrated
 
-## Wildcard File Loading
+## Parallel File Processing
+
+Multiple CSV files were loaded and analyzed as a single dataset using DASK.
+
+## Wildcard File Reading
+
+The wildcard pattern:
 
 ```python
-ddf.read_csv("data/2000*.csv")
+data/2000*.csv
 ```
 
-loaded all matching fi*es automatically.
+allowed all matching files to be loaded automatically.
 
----
+## DASK DataFrames
 
-## Paralle* File Processing
-
-DASK processed m*ltiple files simultaneously rather*than sequentially.
-
----
-
-## DASK D*taFrames
-
-Multiple files were trea*ed as a single logical DataFrame.
-*---
+Multiple physical files were represented as one logical DataFrame.
 
 ## Lazy Evaluation
 
-Operation* were delayed until:
+DASK delayed execution until calculations were requested using:
 
 ```python
-.c*mpute()
+.compute()
 ```
 
-was called.
+## Large Dataset Analysis
+
+The activity successfully processed:
+
+```text
+2,592,000 rows
+```
+
+across multiple files.
 
 ---
 
-## *arge-Scale Analytics
+# Real-World Applications
 
-The activity*demonstrated how DASK can efficien*ly analyze millions of records whi*e maintaining a workflow similar t* Pandas.
+The techniques demonstrated in this activity are commonly used in:
+
+- Data Lakes
+- ETL Pipelines
+- Log Processing
+- IoT Sensor Analytics
+- Fleet Telemetry Platforms
+- Utility Asset Analytics
+- Apache Spark Workloads
+- Databricks Pipelines
+- AWS Glue Jobs
 
 ---
-
-# Real-World Applic*tions
-
-These techniques are common*y used in:
-
-- Apache Spark workloa*s
-- Databricks pipelines
-- AWS Glu* jobs
-- Data lake analytics
-- Log *rocessing
-- IoT sensor analytics
--*Fleet telemetry processing
-- Utili*y asset analytics
-- ETL pipelines
-*---
 
 # Key Takeaways
 
-1. DASK can *ead multiple files simultaneously *sing wildcards.
-2. DASK DataFrames*behave similarly to Pandas DataFra*es.
-3. Parallel processing improve* efficiency when working with many*files.
-4. The `.compute()` method *xecutes delayed operations.
-5. DAS* can efficiently process datasets *ontaining millions of rows.
-6. Rea*ing and analyzing multiple files i* a common data engineering use cas*.
+1. DASK can efficiently read multiple files in parallel.
+2. Wildcard patterns simplify large-scale file ingestion.
+3. DASK DataFrames provide a scalable alternative to Pandas.
+4. Parallel processing improves performance when working with many files.
+5. Datasets containing millions of rows can be analyzed efficiently using DASK.
+6. The same concepts are used in modern data engineering platforms such as Spark, Databricks, and AWS Glue.
 
 ---
 
 # Conclusion
 
-In this acti*ity, I used DASK to read and analy*e multiple CSV files in parallel. *he files were loaded into a single*DASK DataFrame using a wildcard pa*tern, allowing the dataset to be a*alyzed as a unified collection. I *uccessfully displayed the first fi*e rows, calculated the mean of the*x column, determined the number of*columns, and computed the total nu*ber of rows. The final dataset con*ained 5 columns and 2,592,000 rows* This activity demonstrated the va*ue of DASK for large-scale file pr*cessing and highlighted how parall*l computing can improve efficiency*when working with large datasets spread across multiple files.
+In this activity, DASK was used to read and analyze multiple CSV files in parallel. The files were combined into a single DASK DataFrame using a wildcard file pattern and analyzed through several computations. The final dataset contained 5 columns and 2,592,000 rows. This activity demonstrated how DASK simplifies large-scale file ingestion and analysis while providing a practical introduction to parallel data processing techniques used throughout modern data engineering platforms.
