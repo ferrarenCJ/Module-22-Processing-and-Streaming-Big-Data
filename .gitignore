@@ -83,3 +83,8 @@ dask-worker-space/
 # Graphviz Visualizations
 *.svg
 *.png
+
+
+**/.ipynb_checkpoints/
+
+*_starter.zip
