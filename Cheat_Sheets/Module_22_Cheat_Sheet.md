@@ -600,7 +600,7 @@ Server
 
 ---
 
-# Module 22 Exam Tips
+# Module 22 Tips
 
 ### Remember
 
