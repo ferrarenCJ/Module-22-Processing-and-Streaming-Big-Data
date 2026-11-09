@@ -6,8 +6,8 @@ The final assignments in Module 22 combined the major concepts covered throughou
 
 Module 22 consisted of two final assignments:
 
-1. Final Assignment 22.1 (Part 1): Processing and Streaming Big Data
-2. Final Assignment 22.1 (Part 2): Processing and Streaming Big Data
+1. Final_Assignment_22_1_Processing_and_Streaming_Big_Data
+2. Final_Assignment_22_1_Part2_Web_Socket_Streaming
 
 Together, these assignments reinforced both batch-processing and streaming data engineering concepts.
 
